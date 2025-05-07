@@ -27,7 +27,7 @@ jobs:
         ls -la
 
     - name: Checkout target branch
-      uses: actions/checkout@v4
+      uses: actions/checkout@v2
       with:
         ref: downloaded
         fetch-depth: 0
