@@ -28,7 +28,7 @@ jobs:
             echo "url $url"
             wget $url
         done < urls.txt
-        ls -l
+        ls -la
         git checkout downloaded
         git add .
         git commit -m "update"
