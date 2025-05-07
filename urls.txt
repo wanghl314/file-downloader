@@ -1,2 +1,2 @@
-https://download.sonatype.com/nexus/3/latest-win64.zip
-https://download.sonatype.com/nexus/3/latest-unix.tar.gz
+https://download.sonatype.com/nexus/3/nexus-3.80.0-06-win-x86_64.zip
+https://download.sonatype.com/nexus/3/nexus-3.80.0-06-linux-x86_64.tar.gz
