@@ -1,0 +1,26 @@
+name: Download
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+
+jobs:
+
+  build:
+    name: download
+    steps:
+    - name: download file from url
+      run: |
+        while IFS= read -r line || [ -n "$line" ]; do
+            # 忽略空行与注释
+            [[ -z "$line" ]] && continue
+            if echo "$line" | grep -q '^\s*#'; then
+                continue
+            fi
+            
+            url="$line"
+            echo "url $url"
+            wget $url
+        done < urls.txt
