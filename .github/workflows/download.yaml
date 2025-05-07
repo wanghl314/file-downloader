@@ -10,6 +10,7 @@ jobs:
 
   build:
     name: download
+    runs-on: ubuntu-latest
     steps:
     - name: download file from url
       run: |
