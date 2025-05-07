@@ -29,3 +29,7 @@ jobs:
             wget $url
         done < urls.txt
         ls -l
+        git checkout downloaded
+        git add .
+        git commit -m "update"
+        git push
