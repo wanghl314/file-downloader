@@ -28,3 +28,4 @@ jobs:
             echo "url $url"
             wget $url
         done < urls.txt
+        ls -l
