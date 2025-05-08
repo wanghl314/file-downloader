@@ -2,17 +2,25 @@ name: Download
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
     steps:
     - name: Checkout Code
       uses: actions/checkout@v4
+      with:
+          ref: main
 
     - name: download file from url
       run: |
+        dir=tmp_download
+        mkdir -p $dir
         while IFS= read -r line || [ -n "$line" ]; do
             # 忽略空行与注释
             [[ -z "$line" ]] && continue
@@ -22,21 +30,25 @@ jobs:
             
             url="$line"
             echo "url $url"
-            wget $url
+            wget -p $dir $url
         done < urls.txt
-        ls -la
+        ls -la $dir
 
     - name: Checkout target branch
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         ref: downloaded
-        fetch-depth: 0
-        token: ${{ secrets.GITHUB_TOKEN }}
+        clean: false
+
+    - name: Copy to target dir
+      run: |
+        rm -rf download
+        mv tmp_download download
 
     - name: push files to target branch
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "github-actions"
-        git add .
+        git add download/
         git commit -m "update"
-        git push origin downloaded
+        git push
