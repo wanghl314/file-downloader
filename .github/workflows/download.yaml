@@ -30,7 +30,7 @@ jobs:
             
             url="$line"
             echo "url $url"
-            wget -p $dir $url
+            wget -P $dir $url --no-check-certificate
         done < urls.txt
         ls -la $dir
 
